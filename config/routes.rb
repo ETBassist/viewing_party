@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#index'
 
   post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
 end
