@@ -1,0 +1,13 @@
+<%= button_to 'Discover Top 40 Movies', '/movies', method: :get %>
+
+<%= form_tag '/movies' do %>
+  <%= text_field_tag :search, nil, placeholder: 'Search By Movie Title' %>
+  <%= submit_tag 'Search For Movies' %>
+<% end %>
+
+<% @movies.each do |movie| %>
+  <div class='movie'>
+    <p class='movie-title'><%= movie[:title] %></p>
+    <p class='vote-average'><%= movie[:vote_average] %></p>
+  </div>
+<% end %>

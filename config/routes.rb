@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   
   get '/discover', to: 'discover#index'
+
+  get '/movies', to: 'movies#index'
 end
