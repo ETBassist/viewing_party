@@ -9,6 +9,11 @@
   </head>
 
   <body>
+    <nav>
+      <% if current_user %>
+        <%= link_to "Logout", "/logout" %>
+      <% end %>
+    </nav>
     <% flash.each do |type, message| %>
     <p><%= message %></p>
     <% end %>
