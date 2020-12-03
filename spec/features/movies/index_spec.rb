@@ -24,7 +24,7 @@ describe 'Movies Page' do
       end
     end
 
-    xit "I can search by movie title and see up top 40 results for that search" do
+    it "I can search by movie title and see up top 40 results for that search" do
       fill_in :search, with: 'Love'
       click_on 'Search For Movies'
       expect(current_path).to eq('/movies')
@@ -39,14 +39,14 @@ describe 'Movies Page' do
 
 
     # Here we just want the search to fail for sad path
-    xit 'If no movie matches search result, user will recieve a message' do
+    it 'If no movie matches search result, user will recieve a message' do
       fill_in :search, with: 'The balloon popped and it was gibberish'
       click_on 'Search For Movies'
       expect(current_path).to eq('/movies')
 
-      within '#results' do
+      #within '#results' do
         expect(page).to have_content("No movies have matched your request! Please try again!")
-      end
+      #end
     end
   end
 end
