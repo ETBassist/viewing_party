@@ -10,13 +10,12 @@ describe 'Movies Show Page' do
       click_on 'Search For Movies'
       click_link 'Edge of Tomorrow'
 
-      save_and_open_page
-      # expect(page).to have_content(movie.title)
-      # expect(page).to have_content(movie.vote_average)
-      # expect(page).to have_content(movie.runtime)
-      # expect(page).to have_content(movies.genre)
-      # expect(page).to have_content(movies.description)
-      # expect(page).to have_content(movie.cast_members)
+      expect(page).to have_css("#title")
+      expect(page).to have_css('#vote_average')
+      expect(page).to have_css('#runtime')
+      expect(page).to have_css('.genres')
+      expect(page).to have_css('.description')
+      expect(page).to have_css('.cast_members')
     end
   end
 end
