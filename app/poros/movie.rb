@@ -5,7 +5,7 @@ class Movie
               :description,
               :genres,
               :cast_members,
-              :reviews,
+              :reviews_data,
               :reviews_count
 
   def initialize(movie_details, movie_credits, movie_reviews)
@@ -15,7 +15,7 @@ class Movie
     @description = movie_details[:overview]
     @genres = movie_details[:genres]
     @cast_members = movie_credits[:cast]
-    @reviews = movie_reviews[:results]
+    @reviews_data = movie_reviews[:results]
     @reviews_count = movie_reviews[:total_results]
   end
 
@@ -32,6 +32,12 @@ class Movie
   def genre_names
     @genres.map do |genre|
       genre[:name]
+    end
+  end
+
+  def reviews
+    @reviews_data.map do |rev|
+      Review.new(rev)
     end
   end
 end
