@@ -6,7 +6,7 @@ describe 'Movies Page' do
       visit '/movies'
     end
 
-    it 'I see the 40 top rated movies' do
+    it 'I see the 40 top rated movies', :vcr do
       expect(page).to have_selector('.movie', count: 40)
       expect(page).to have_button('Discover Top 40 Movies')
       expect(page).to have_field(:search)
@@ -17,29 +17,25 @@ describe 'Movies Page' do
       end
     end
 
-    it "I see a text field with a 'Find Movies' button" do
+    it "I see a text field with a 'Find Movies' button", :vcr do
       within "#search-movies" do
         expect(page.has_field? :search).to be_truthy
         expect(page).to have_button "Search For Movies"
       end
     end
 
-    it "I can search by movie title and see up top 40 results for that search" do
+    it "I can search by movie title and see up top 40 results for that search", :vcr do
       fill_in :search, with: 'Love'
       click_on 'Search For Movies'
       expect(current_path).to eq('/movies')
 
-
-      # How can we future proof this test to not break later on?
       within '#results' do
         expect(page).to have_content("Love")
         expect(page).to have_content("Vote Average: ")
       end
     end
 
-
-    # Here we just want the search to fail for sad path
-    it 'If no movie matches search result, user will recieve a message' do
+    it 'If no movie matches search result, user will recieve a message', :vcr do
       fill_in :search, with: 'The balloon popped and it was gibberish'
       click_on 'Search For Movies'
       expect(current_path).to eq('/movies')
