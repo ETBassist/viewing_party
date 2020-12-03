@@ -44,9 +44,9 @@ describe 'Movies Page' do
       click_on 'Search For Movies'
       expect(current_path).to eq('/movies')
 
-      #within '#results' do
+      within '#results' do
         expect(page).to have_content("No movies have matched your request! Please try again!")
-      #end
+      end
     end
   end
 end

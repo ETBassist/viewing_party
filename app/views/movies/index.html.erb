@@ -1,17 +1,21 @@
 <%= button_to 'Discover Top 40 Movies', '/movies', method: :get %>
 
 <section id='search-movies'>
-  <%= form_tag('/movies', method: 'get') do %>
+  <%= form_tag('/movies', method: :get) do %>
     <%= search_field_tag :search, nil, placeholder: 'Search By Movie Title' %>
     <%= submit_tag 'Search For Movies' %>
   <% end %>
 </section>
 
 <section id="results">
-  <% @movies.each do |movie| %>
-    <div class='movie'>
-      <p class='movie-title'><%= movie[:title] %></p>
-      <p class='vote-average'>Vote Average: <%= movie[:vote_average] %></p>
-    </div>
+  <% if @movies.empty? %>
+    <p>No movies have matched your request! Please try again!</p>
+  <% else %>
+    <% @movies.each do |movie| %>
+      <div class='movie'>
+        <p class='movie-title'><%= movie[:title] %></p>
+        <p class='vote-average'>Vote Average: <%= movie[:vote_average] %></p>
+      </div>
+    <% end %>
   <% end %>
 </section>

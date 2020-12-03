@@ -12,9 +12,6 @@ class MoviesController < ApplicationController
     end
 
     @movies = movie_container.flatten
-    if @movies.empty?
-      flash[:notice] = "No movies have matched your request! Please try again!"
-    end
   end
 
   private
