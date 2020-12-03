@@ -1,6 +1,6 @@
 <%= button_to 'Discover Top 40 Movies', '/movies', method: :get %>
 
-<%= form_tag '/movies' do %>
+<%= form_tag('/movies', method: :get) do %>
   <%= text_field_tag :search, nil, placeholder: 'Search By Movie Title' %>
   <%= submit_tag 'Search For Movies' %>
 <% end %>
