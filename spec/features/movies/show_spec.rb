@@ -16,6 +16,7 @@ describe 'Movies Show Page' do
       expect(page).to have_css('.genres')
       expect(page).to have_css('.description')
       expect(page).to have_css('.cast_members')
+      expect(page).to have_css('.reviews')
     end
   end
 end
