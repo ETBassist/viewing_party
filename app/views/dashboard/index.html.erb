@@ -1,6 +1,19 @@
 <%= button_to 'Discover Movies', '/discover', method: :get %>
+
 <section class="friends">
+  <%= form_tag('/friendships') do %>
+    <%= text_field_tag :friend_email, nil, placeholder: "Friend's email" %>
+    <%= submit_tag "Add Friend" %>
+  <%end%>
+
+  <div class="current_friends">
+    <p>Friends:</p>
+    <% @user.friends.each do |friend| %>
+    <%= friend.name %> <br>
+    <% end %>
+  </div>
 </section>
+
 
 <section class="viewing-parties">
 </section>
