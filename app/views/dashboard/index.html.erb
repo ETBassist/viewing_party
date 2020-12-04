@@ -8,9 +8,13 @@
 
   <div class="current_friends">
     <p>Friends:</p>
-    <% @user.friends.each do |friend| %>
-    <%= friend.name %> <br>
-    <% end %>
+    <% if @user.friends.empty? %>
+      <p>You currently have no friends</p>
+    <% else %>
+      <% @user.friends.each do |friend| %>
+        <%= friend.name %> <br>
+      <% end %>
+    <%end%>
   </div>
 </section>
 

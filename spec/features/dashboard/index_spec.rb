@@ -29,6 +29,8 @@ describe 'Dashboard' do
     it "I can add and see my friends" do
       visit '/dashboard'
 
+      expect(page).to have_content("You currently have no friends")
+
       within(".friends") do
         expect(page).to have_button("Add Friend")
         expect(page).to have_field(:friend_email)
