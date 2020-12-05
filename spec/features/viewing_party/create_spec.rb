@@ -25,14 +25,13 @@ describe 'Create Viewing Party' do
       within ".viewing-party" do
         click_on "Create Viewing Party"
       end
-      save_and_open_page
 
       within ".viewing-party-form" do
         expect(page).to have_content("Edge of Tomorrow")
         expect(find_field(:party_duration).value).to eq("113")
         page.find(:xpath, '//input[@id="date"]').set(time)
         page.find(:xpath, '//input[@id="time"]').set(date)
-        page.find("#user-#{@user_2.id}").set(true)
+        page.find("#friend_ids_").set(true)
         # will need to add test/expectation to check friends can be added
         click_on "Create Party" 
       end
