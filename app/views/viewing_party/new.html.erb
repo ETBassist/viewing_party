@@ -18,7 +18,11 @@
  <!-- Once we iron out viewing parties in the bd, we need to add a
  collection_check_boxes that allows us to check the friends we want to invite -->
   <span>Include:  %><br/>
+    <% current_user.friends.each do |friend| %>
+      <input type="checkbox" id="user-<%= friend.id %>" value="<%= friend.id %>"/><%= friend.name %>
+    <% end %>
 
   <%= submit_tag "Create Party" %>
+  </spen>
 </section>
 <% end %>
