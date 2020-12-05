@@ -6,7 +6,8 @@ class Movie
               :genres,
               :cast_members,
               :reviews_data,
-              :reviews_count
+              :reviews_count,
+              :movie_id
 
   def initialize(movie_details, movie_credits, movie_reviews)
     @title = movie_details[:original_title]
@@ -17,6 +18,7 @@ class Movie
     @cast_members = movie_credits[:cast]
     @reviews_data = movie_reviews[:results]
     @reviews_count = movie_reviews[:total_results]
+    @movie_id = movie_details[:id]
   end
 
   def top_ten_cast_members

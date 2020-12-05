@@ -3,6 +3,10 @@
     <%= tag.h1 @movie.title %>
   </section>
 
+  <div class="viewing_party">
+    <h4><%= link_to "Create Viewing Party", "/viewing_party/new?movie_id=#{@movie.movie_id}" %></h4>
+  </div>
+
   <main>
     <ul>
       <%= tag.li "Vote Average: ", id: 'vote_average' %>
