@@ -20,5 +20,14 @@
 
 
 <section class="viewing-parties">
-  
+  <% @user.parties.each do |party| %>
+    <%= party.movie_title %>
+    <%= party.date %>
+    <%= party.time %>
+    <% if party.host_id == @user.id %>
+      <p>Hosting</p>
+    <% else %>
+      <p>Invited</p>
+    <% end %>
+  <% end %>
 </section>

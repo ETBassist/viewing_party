@@ -4,10 +4,18 @@ class ViewingPartyController < ApplicationController
   end
 
   def create
+    party = Party.new(party_params)
+    party.save
+    Invitation.create(party_id: party.id,
+                      user_id: current_user.id)
     redirect_to '/dashboard'
   end
 
   private
+
+  def party_params
+    params.permit(:date, :party_duration, :time, :movie_title, :host_id)
+  end
 
   def quick_fix(movie_id)
     movie_details = get_json("/3/movie/#{movie_id}")
