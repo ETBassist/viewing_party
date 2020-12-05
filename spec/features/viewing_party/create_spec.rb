@@ -5,6 +5,7 @@ describe 'Create Viewing Party' do
     before :each do
       @user = User.create(name: 'Brian', email: 'user@example.com', password: 'password')
       @user_2 = User.create(name: 'Bob Vance', email: 'user2@example.com', password: 'password')
+      Friendship.create!(user_id: @user.id, friend_id: @user_2.id)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
@@ -24,12 +25,14 @@ describe 'Create Viewing Party' do
       within ".viewing-party" do
         click_on "Create Viewing Party"
       end
+      save_and_open_page
 
       within ".viewing-party-form" do
         expect(page).to have_content("Edge of Tomorrow")
         expect(find_field(:party_duration).value).to eq("113")
         page.find(:xpath, '//input[@id="date"]').set(time)
         page.find(:xpath, '//input[@id="time"]').set(date)
+        page.find("#user-#{@user_2.id}").set(true)
         # will need to add test/expectation to check friends can be added
         click_on "Create Party" 
       end
