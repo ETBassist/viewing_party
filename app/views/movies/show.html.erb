@@ -35,7 +35,7 @@
       <h3> <%= @movie.reviews_count%> Reviews</h3>
       <% @movie.reviews.each do |rev| %>
       <%= "Author: #{rev.author}" %> <br>
-      <%= "Description: #{rev.description}" %> <br><br>
+      <p>Description: <%= sanitize(rev.description) %></p><br><br>
       <% end %>
     </div>
   </main>
