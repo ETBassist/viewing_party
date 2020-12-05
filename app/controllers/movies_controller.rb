@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
   def index
     movie_container = []
 
-    if params[:search]
+    if params[:search] && !params[:search].empty?
       response = get_json("/3/search/movie?query=#{params[:search]}")
       movie_container << response[:results]
       movie_container << get_json("/3/search/movie?query=#{params[:search]}&page=2") if response[:total_pages] > 1
