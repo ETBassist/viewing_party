@@ -35,7 +35,7 @@ describe 'Create Viewing Party' do
       end
       expect(current_path).to eq("/dashboard")
 
-      within('.scheduled-parties') do
+      within('.viewing-parties') do
         expect(page).to have_content("Edge of Tomorrow")
         expect(page).to have_content(time)
         expect(page).to have_content(date)
