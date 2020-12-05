@@ -4,10 +4,13 @@ class ViewingPartyController < ApplicationController
   end
 
   def create
-    party = Party.new(party_params)
-    party.save
+    party = Party.create(party_params)
     Invitation.create(party_id: party.id,
                       user_id: current_user.id)
+    params[:friend][:ids].each do |friend_id|
+      Invitation.create(party_id: party.id,
+                        user_id: friend_id)
+    end
     redirect_to '/dashboard'
   end
 
