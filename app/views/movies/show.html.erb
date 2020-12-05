@@ -3,8 +3,10 @@
     <%= tag.h1 @movie.title %>
   </section>
 
-  <div class="viewing_party">
+  <div class="viewing-party">
+    <% unless current_user.nil?  %>
     <h4><%= link_to "Create Viewing Party", "/viewing_party/new?movie_id=#{@movie.movie_id}" %></h4>
+    <% end %>
   </div>
 
   <main>
