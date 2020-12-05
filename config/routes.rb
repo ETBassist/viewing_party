@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   get '/movies/:id', to: 'movies#show'
 
   post '/friendships', to: 'friendships#create'
+
+  resources :viewing_party, only: [:new, :create]
 end
