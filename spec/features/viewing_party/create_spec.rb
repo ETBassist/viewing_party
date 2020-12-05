@@ -16,6 +16,9 @@ describe 'Create Viewing Party' do
     end
 
     it "I see a link to create a viewing party and clicking this redirects me to a new viewing party form", :vcr do
+      time = DateTime.now.to_time.to_s
+      date = DateTime.now.to_date.to_s
+
       expect(page).to have_link("Create Viewing Party")
 
       within ".viewing-party" do
@@ -25,12 +28,19 @@ describe 'Create Viewing Party' do
       within ".viewing-party-form" do
         expect(page).to have_content("Edge of Tomorrow")
         expect(find_field(:party_duration).value).to eq("113")
-        page.find(:xpath, '//input[@id="date"]').set(DateTime.now.to_date.to_s)
-        page.find(:xpath, '//input[@id="time"]').set(DateTime.now.to_time.to_s)
+        page.find(:xpath, '//input[@id="date"]').set(time)
+        page.find(:xpath, '//input[@id="time"]').set(date)
         # will need to add test/expectation to check friends can be added
         click_on "Create Party" 
       end
-      expect(current_path).to eq("/viewing_party/new")
+      expect(current_path).to eq("/dashboard")
+
+      within('.scheduled-parties') do
+        expect(page).to have_content("Edge of Tomorrow")
+        expect(page).to have_content(time)
+        expect(page).to have_content(date)
+        expect(page).to have_content("Hosting")
+      end
     end
   end
 

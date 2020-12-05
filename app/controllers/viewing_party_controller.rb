@@ -3,13 +3,18 @@ class ViewingPartyController < ApplicationController
     @movie = quick_fix(params[:movie_id])
   end
 
+  def create
+    redirect_to '/dashboard'
+  end
+
   private
+
   def quick_fix(movie_id)
     movie_details = get_json("/3/movie/#{movie_id}")
     movie_credits = get_json("/3/movie/#{movie_id}/credits")
     movie_reviews = get_json("/3/movie/#{movie_id}/reviews")
 
-    movie = Movie.new(movie_details, movie_credits, movie_reviews)
+    Movie.new(movie_details, movie_credits, movie_reviews)
   end
 
   def conn
