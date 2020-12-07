@@ -16,5 +16,5 @@ Rails.application.routes.draw do
 
   post '/friendships', to: 'friendships#create'
 
-  resources :viewing_party, only: [:new, :create]
+  resources :viewing_party, only: [:new, :create, :show]
 end
