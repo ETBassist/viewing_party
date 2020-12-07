@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe 'Create Viewing Party' do
+describe 'Create Viewing Party', :vcr do
   describe 'As an authenticated user' do
     before :each do
       @user = User.create(name: 'Brian', email: 'user@example.com', password: 'password')
@@ -33,7 +33,7 @@ describe 'Create Viewing Party' do
         page.find(:xpath, '//input[@id="time"]').set(date)
         page.find("#friend_ids_").set(true)
         # will need to add test/expectation to check friends can be added
-        click_on "Create Party" 
+        click_on "Create Party"
       end
       expect(current_path).to eq("/dashboard")
 
@@ -43,6 +43,72 @@ describe 'Create Viewing Party' do
         expect(page).to have_content(date)
         expect(page).to have_content("Hosting")
       end
+    end
+
+    it "Other users can see their invited parties", :vcr do
+      time = DateTime.now.to_time.to_s
+      date = DateTime.now.to_date.to_s
+
+      within ".viewing-party" do
+        click_on "Create Viewing Party"
+      end
+
+      within ".viewing-party-form" do
+        expect(page).to have_content("Edge of Tomorrow")
+        expect(find_field(:party_duration).value).to eq("113")
+        page.find(:xpath, '//input[@id="date"]').set(time)
+        page.find(:xpath, '//input[@id="time"]').set(date)
+        page.find("#friend_ids_").set(true)
+        # will need to add test/expectation to check friends can be added
+        click_on "Create Party"
+      end
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_2)
+
+      visit '/dashboard'
+
+      within('.viewing-parties') do
+        expect(page).to have_content("Edge of Tomorrow")
+        expect(page).to have_content(time)
+        expect(page).to have_content(date)
+        expect(page).to have_content("Invited")
+      end
+    end
+
+    it "I cannot create a party with no friends" do
+      time = DateTime.now.to_time.to_s
+      date = DateTime.now.to_date.to_s
+
+      within ".viewing-party" do
+        click_on "Create Viewing Party"
+      end
+
+      within ".viewing-party-form" do
+        expect(page).to have_content("Edge of Tomorrow")
+        expect(find_field(:party_duration).value).to eq("113")
+        page.find(:xpath, '//input[@id="date"]').set(time)
+        page.find(:xpath, '//input[@id="time"]').set(date)
+
+        click_on "Create Party"
+      end
+
+      expect(page).to have_content("Add a friend first")
+    end
+
+    it "I cannot create a viewing party with invalid fields" do
+      within ".viewing-party" do
+        click_on "Create Viewing Party"
+      end
+
+      within ".viewing-party-form" do
+        expect(page).to have_content("Edge of Tomorrow")
+        expect(find_field(:party_duration).value).to eq("113")
+        page.find("#friend_ids_").set(true)
+
+        click_on "Create Party"
+      end
+
+      expect(page).to have_content("Date can't be blank and Time can't be blank")
     end
   end
 
