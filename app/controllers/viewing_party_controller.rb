@@ -1,11 +1,15 @@
 class ViewingPartyController < ApplicationController
+  def show
+    @party = Party.find(params[:id])
+  end
+
   def new
     @movie = quick_fix(params[:movie_id])
   end
 
   def create
     party = Party.new(party_params)
-# require "pry"; binding.pry
+
     if params[:friend] && party.save
       Invitation.create(party_id: party.id,
                         user_id: current_user.id)
