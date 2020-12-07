@@ -31,8 +31,8 @@ describe 'Create Viewing Party', :vcr do
         expect(find_field(:party_duration).value).to eq("113")
         page.find(:xpath, '//input[@id="date"]').set(time)
         page.find(:xpath, '//input[@id="time"]').set(date)
-        page.find("#friend_ids_").set(true)
-        # will need to add test/expectation to check friends can be added
+        page.find("#friend_ids_#{@user_2.id}").set(true)
+
         click_on "Create Party"
       end
       expect(current_path).to eq("/dashboard")
@@ -43,6 +43,40 @@ describe 'Create Viewing Party', :vcr do
         expect(page).to have_content(date)
         expect(page).to have_content("Hosting")
       end
+    end
+
+    it "I can add multiple friends to a party" do
+      user_3 = User.create(name: 'Phyllis Smith', email: 'user3@example.com', password: 'password')
+      Friendship.create!(user_id: @user.id, friend_id: user_3.id)
+
+      time = DateTime.now.to_time.to_s
+      date = DateTime.now.to_date.to_s
+
+      within ".viewing-party" do
+        click_on "Create Viewing Party"
+      end
+
+      within ".viewing-party-form" do
+        expect(page).to have_content("Edge of Tomorrow")
+        expect(find_field(:party_duration).value).to eq("113")
+        page.find(:xpath, '//input[@id="date"]').set(time)
+        page.find(:xpath, '//input[@id="time"]').set(date)
+
+        page.find("#friend_ids_#{@user_2.id}").set(true)
+        page.find("#friend_ids_#{user_3.id}").set(true)
+
+        click_on "Create Party"
+      end
+
+      expect(current_path).to eq("/dashboard")
+
+      within('.viewing-parties') do
+        click_on("View Party")
+      end
+
+      # On party show page
+      expect(page).to have_content(@user_2.name)
+      expect(page).to have_content(user_3.name)
     end
 
     it "Other users can see their invited parties", :vcr do
@@ -58,8 +92,8 @@ describe 'Create Viewing Party', :vcr do
         expect(find_field(:party_duration).value).to eq("113")
         page.find(:xpath, '//input[@id="date"]').set(time)
         page.find(:xpath, '//input[@id="time"]').set(date)
-        page.find("#friend_ids_").set(true)
-        # will need to add test/expectation to check friends can be added
+        page.find("#friend_ids_#{@user_2.id}").set(true)
+
         click_on "Create Party"
       end
 
@@ -103,7 +137,7 @@ describe 'Create Viewing Party', :vcr do
       within ".viewing-party-form" do
         expect(page).to have_content("Edge of Tomorrow")
         expect(find_field(:party_duration).value).to eq("113")
-        page.find("#friend_ids_").set(true)
+        page.find("#friend_ids_#{@user_2.id}").set(true)
 
         click_on "Create Party"
       end
