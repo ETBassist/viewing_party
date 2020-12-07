@@ -4,14 +4,21 @@ class ViewingPartyController < ApplicationController
   end
 
   def create
-    party = Party.create(party_params)
-    Invitation.create(party_id: party.id,
-                      user_id: current_user.id)
-    params[:friend][:ids].each do |friend_id|
+    party = Party.new(party_params)
+# require "pry"; binding.pry
+    if params[:friend] && party.save
       Invitation.create(party_id: party.id,
-                        user_id: friend_id)
+                        user_id: current_user.id)
+      params[:friend][:ids].each do |friend_id|
+        Invitation.create(party_id: party.id,
+                          user_id: friend_id)
+      end
+      redirect_to '/dashboard'
+    else
+      flash[:notice] = party.errors.full_messages.to_sentence
+      flash[:notice] = "Add a friend first" if params[:friend].nil?
+      redirect_to "/viewing_party/new/?movie_id=#{params[:movie_id]}"
     end
-    redirect_to '/dashboard'
   end
 
   private
