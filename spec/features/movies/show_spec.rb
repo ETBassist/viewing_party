@@ -21,8 +21,8 @@ describe 'Movies Show Page' do
       expect(page).to have_css('.reviews')
     end
 
-    it "I see a button to create a viewing party", :vcr do
-      expect(page).to have_link("Create Viewing Party")
+    it "I do not see a link to create a viewing party", :vcr do
+      expect(page).to have_no_link("Create Viewing Party")
     end
   end
 end

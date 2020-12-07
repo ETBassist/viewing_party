@@ -1,0 +1,10 @@
+<h2><%= @party.movie_title %></h2>
+
+<p>Details</p>
+<%= @party.date %>
+<%= @party.time %>
+
+<p>Attendees</p>
+<% @party.users.each do |user| %>
+  <%= user.name %>
+<% end %>

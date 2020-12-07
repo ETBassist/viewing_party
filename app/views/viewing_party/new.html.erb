@@ -1,0 +1,29 @@
+<h1>Create a Viewing Party</h1>
+
+<section class="viewing-party-form">
+
+<%= form_tag viewing_party_index_path do %>
+  <%= tag.h2 @movie.title %>
+  <%= hidden_field_tag :movie_title, @movie.title %>
+
+  <%= hidden_field_tag :movie_id, @movie.movie_id %>
+
+  <%= hidden_field_tag :host_id, current_user.id %>
+
+  <%= label_tag :party_duration %>
+  <%= text_field_tag :party_duration, @movie.runtime %><br/>
+
+  <label for="date">Select a date for your viewing party:</label>
+  <input type="date" id="date" name="date"><br/>
+
+  <label for="time">Select a time for your viewing party:</label>
+  <input type="time" id="time" name="time"><br/>
+
+ <!-- Once we iron out viewing parties in the bd, we need to add a
+ collection_check_boxes that allows us to check the friends we want to invite -->
+  <span>Include: <br/>
+    <%= collection_check_boxes :friend, :ids, current_user.friends, :id, :name, include_hidden: false %>
+  </span>
+  <%= submit_tag "Create Party" %>
+</section>
+<% end %>
