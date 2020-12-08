@@ -64,7 +64,7 @@ ViewingParty wants to help you connect with your friends and family for movie ni
 
 Here's why:
 * Distance should not stop you from sharing a fun movie night with those you care about!
-* Convenience. ViewingParty is simplistic in design. Simply select a movie you are intested in and create a viewing party! Easy!  :smile:
+* Convenience. ViewingParty is simplistic in design. Simply select a movie you are interested in and create a viewing party! Easy!  :smile:
 
 
 A list of commonly used resources and references that our team found helpful in the creation of this project are listed in acknowledgements.
