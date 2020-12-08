@@ -1,10 +1,10 @@
 class MoviesController < ApplicationController
   def index
-    if params[:search] && !params[:search].empty?
-      @movies = MoviesFacade.movies_by_keyword(params[:search])
-    else
-      @movies = MoviesFacade.top_rated_movies
-    end
+    @movies = if params[:search].present?
+                MoviesFacade.movies_by_keyword(params[:search])
+              else
+                MoviesFacade.top_rated_movies
+              end
   end
 
   def show
