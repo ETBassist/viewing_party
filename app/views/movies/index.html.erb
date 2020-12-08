@@ -13,8 +13,8 @@
   <% else %>
     <% @movies.each do |movie| %>
       <div class='movie'>
-        <%= link_to movie[:title], "/movies/#{movie[:id]}", class: 'movie-title' %>
-        <p class='vote-average'>Vote Average: <%= movie[:vote_average] %></p>
+        <%= link_to movie.title, "/movies/#{movie.movie_id}", class: 'movie-title' %>
+        <p class='vote-average'>Vote Average: <%= movie.vote_average %></p>
       </div>
     <% end %>
   <% end %>
