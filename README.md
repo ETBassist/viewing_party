@@ -1,6 +1,6 @@
 # ViewingParty
 <!-- Add link to heroku -->
-Click [here]() to try out ViewingParty on herokuapp!
+Click [here](https://pacific-oasis-98177.herokuapp.com/) to try out ViewingParty on herokuapp!
 
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
