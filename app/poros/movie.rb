@@ -9,15 +9,15 @@ class Movie
               :reviews_count,
               :movie_id
 
-  def initialize(movie_details, movie_credits, movie_reviews)
+  def initialize(movie_details)
     @title = movie_details[:original_title]
     @vote_average = movie_details[:vote_average]
     @runtime = movie_details[:runtime]
     @description = movie_details[:overview]
     @genres = movie_details[:genres]
-    @cast_members = movie_credits[:cast]
-    @reviews_data = movie_reviews[:results]
-    @reviews_count = movie_reviews[:total_results]
+    @cast_members = movie_details[:credits][:cast] if movie_details[:credits]
+    @reviews_data = movie_details[:reviews][:results] if movie_details[:reviews]
+    @reviews_count = movie_details[:reviews][:total_results] if movie_details[:reviews]
     @movie_id = movie_details[:id]
   end
 

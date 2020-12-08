@@ -1,25 +1,14 @@
 class MoviesController < ApplicationController
   def index
-    movie_container = []
-
     if params[:search] && !params[:search].empty?
-      response = get_json("/3/search/movie?query=#{params[:search]}")
-      movie_container << response[:results]
-      movie_container << get_json("/3/search/movie?query=#{params[:search]}&page=2") if response[:total_pages] > 1
+      @movies = MoviesFacade.movies_by_keyword(params[:search])
     else
-      movie_container << get_json('/3/movie/top_rated?page=1')[:results]
-      movie_container << get_json('/3/movie/top_rated?page=2')[:results]
+      @movies = MoviesFacade.top_rated_movies
     end
-
-    @movies = movie_container.flatten
   end
 
   def show
-    movie_details = get_json("/3/movie/#{params[:id]}")
-    movie_credits = get_json("/3/movie/#{params[:id]}/credits")
-    movie_reviews = get_json("/3/movie/#{params[:id]}/reviews")
-
-    @movie = Movie.new(movie_details, movie_credits, movie_reviews)
+    @movie = MoviesFacade.movie(params[:id])
   end
 
   private
