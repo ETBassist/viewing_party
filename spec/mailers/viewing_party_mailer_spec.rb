@@ -20,6 +20,10 @@ describe ViewingPartyMailer, type: :mailer do
     it 'renders the body' do
       expect(mail.text_part.body.to_s).to include('Hello The Emperor!')
       expect(mail.text_part.body.to_s).to include('Rey has invited you to a movie night! Happy trails')
+      expect(mail.html_part.body.to_s).to include('Hello The Emperor!')
+      expect(mail.html_part.body.to_s).to include('Rey has invited you to a movie night! Happy trails')
+      expect(mail.body.encoded).to include('Hello The Emperor!')
+      expect(mail.body.encoded).to include('Rey has invited you to a movie night! Happy trails')
     end
   end
 end 
