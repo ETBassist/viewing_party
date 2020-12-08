@@ -5,9 +5,12 @@ describe ViewingPartyMailer, type: :mailer do
     user = User.create(name: 'Rey',
                        email: 'rey@starwars.com',
                        password: 'notthebestjedi')
+    emperor = User.create(name: 'The Emperor',
+                          email: 'thedarksiderules@deathstar.com',
+                          password: 'jedisux')
     email_info = {user: user,
                   message: 'Happy trails',
-                  friend: 'The Emperor'}
+                  friend: emperor }
     let(:mail) { ViewingPartyMailer.inform(email_info, 'thedarksiderules@deathstar.com') }
 
     it 'renders the headers' do
@@ -19,11 +22,11 @@ describe ViewingPartyMailer, type: :mailer do
 
     it 'renders the body' do
       expect(mail.text_part.body.to_s).to include('Hello The Emperor!')
-      expect(mail.text_part.body.to_s).to include('Rey has invited you to a movie night! Happy trails')
+      expect(mail.text_part.body.to_s).to include('Rey has invited you to watch Happy trails!')
       expect(mail.html_part.body.to_s).to include('Hello The Emperor!')
-      expect(mail.html_part.body.to_s).to include('Rey has invited you to a movie night! Happy trails')
+      expect(mail.html_part.body.to_s).to include('Rey has invited you to watch Happy trails!')
       expect(mail.body.encoded).to include('Hello The Emperor!')
-      expect(mail.body.encoded).to include('Rey has invited you to a movie night! Happy trails')
+      expect(mail.body.encoded).to include('Rey has invited you to watch Happy trails!')
     end
   end
 end 
