@@ -17,6 +17,9 @@ describe ViewingPartyMailer, type: :mailer do
       expect(mail.reply_to).to eq(['rey@starwars.com'])
     end
 
-
+    it 'renders the body' do
+      expect(mail.text_part.body.to_s).to include('Hello The Emperor!')
+      expect(mail.text_part.body.to_s).to include('Rey has invited you to a movie night! Happy trails')
+    end
   end
 end 
