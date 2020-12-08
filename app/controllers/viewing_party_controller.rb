@@ -14,6 +14,7 @@ class ViewingPartyController < ApplicationController
       Invitation.create(party_id: party.id,
                         user_id: current_user.id)
       params[:friend][:ids].each do |friend_id|
+        friend = User.find(friend_id)
         Invitation.create(party_id: party.id,
                           user_id: friend_id)
       end
