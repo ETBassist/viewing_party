@@ -12,14 +12,16 @@ class MoviesController < ApplicationController
     end
 
     @movies = movie_container.flatten
+    # @movies = MoviesFacade.movies
   end
 
   def show
-    movie_details = get_json("/3/movie/#{params[:id]}")
-    movie_credits = get_json("/3/movie/#{params[:id]}/credits")
-    movie_reviews = get_json("/3/movie/#{params[:id]}/reviews")
-
-    @movie = Movie.new(movie_details, movie_credits, movie_reviews)
+    # movie_details = get_json("/3/movie/#{params[:id]}")
+    # movie_credits = get_json("/3/movie/#{params[:id]}/credits")
+    # movie_reviews = get_json("/3/movie/#{params[:id]}/reviews")
+    #
+    # @movie = Movie.new(movie_details, movie_credits, movie_reviews)
+    @movie = MoviesFacade.movie(params[:id])
   end
 
   private
