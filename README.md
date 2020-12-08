@@ -10,13 +10,13 @@ Click [here](https://pacific-oasis-98177.herokuapp.com/) to try out ViewingParty
 [![Build Status](https://travis-ci.com/travis-ci/travis-web.svg?branch=master)](https://travis-ci.com/travis-ci/travis-web)
 
 
-<!-- PROJECT LOGO photo -->
-  <!-- Add path to photo from app/assets/images -->
+<!-- PROJECT LOGO photo
+  Add path to photo from app/assets/images
 <br />
 <p align="center">
   <a href="https://github.com/ETBassist/viewing_party">
     <img src="" alt="Logo" width="80" height="80">
-  </a>
+  </a> -->
 
   <h3 align="center">Viewing Party</h3>
 
@@ -26,7 +26,8 @@ Click [here](https://pacific-oasis-98177.herokuapp.com/) to try out ViewingParty
     <a href="https://github.com/ETBassist/viewing_party"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="Add our video link here">View Demo</a>
+    <!-- for adding a demo video
+    <a href="Add our video link here">View Demo</a>  · -->
     ·
     <a href="https://github.com/ETBassist/viewing_party/issues">Report Bug</a>
     ·
@@ -136,7 +137,7 @@ MOVIE_DB_API_KEY: = 'ENTER IN YOUR API KEY'
 After running your migrations, your schema will look something like this!
 <br />
 <p align="center">
-    <img src="app/assets/images/db_schema.png" alt="database" width="900" height="400">
+    <img src="app/assets/images/db_schema.png" alt="database" width="800" height="280">
 </p>
 
 
@@ -211,7 +212,7 @@ Project Link: [ViewingParty](https://github.com/ETBassist/viewing_party)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/ETBassist/viewing_party
 [contributors-url]: https://github.com/ETBassist/viewing_party/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/ETBassist/viewing_party
 [forks-url]: https://github.com/ETBassist/viewing_party/network/members
