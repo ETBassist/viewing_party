@@ -20,7 +20,7 @@ class ViewingPartyController < ApplicationController
       redirect_to '/dashboard'
     else
       flash[:notice] = party.errors.full_messages.to_sentence
-      flash[:notice] = "Add a friend first" if params[:friend].nil?
+      flash[:notice] = 'Add a friend first' if params[:friend].nil?
       redirect_to "/viewing_party/new/?movie_id=#{params[:movie_id]}"
     end
   end

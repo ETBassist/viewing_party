@@ -28,7 +28,7 @@ class Movie
   end
 
   def formatted_runtime
-    "#{@runtime/60}h #{@runtime % 60}min"
+    "#{@runtime / 60}h #{@runtime % 60}min"
   end
 
   def genre_names
