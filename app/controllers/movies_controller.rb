@@ -9,5 +9,6 @@ class MoviesController < ApplicationController
 
   def show
     @movie = MoviesFacade.movie(params[:id])
+    @top_ten_cast_members = MoviesFacade.cast_members_for(@movie)
   end
 end

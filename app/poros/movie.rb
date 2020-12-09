@@ -21,13 +21,6 @@ class Movie
     @movie_id = movie_details[:id]
   end
 
-  # Move to facade?
-  def top_ten_cast_members
-    @cast_members[0..9].map do |member|
-      CastMember.new(member)
-    end
-  end
-
   def formatted_runtime
     "#{@runtime / 60}h #{@runtime % 60}min"
   end
