@@ -11,7 +11,7 @@
 
   <main>
     <ul>
-      <%= tag.li "Vote Average: ", id: 'vote_average' %>
+      <%= tag.li "Vote Average: #{@movie.vote_average}", id: 'vote_average' %>
       <%= tag.li "Runtime: #{@movie.formatted_runtime}", id: 'runtime' %>
       <div class="genres">
         <%= tag.li "Genres: #{@movie.genre_names.join(", ")}" %>
