@@ -14,8 +14,13 @@ class ViewingPartyController < ApplicationController
       Invitation.create(party_id: party.id,
                         user_id: current_user.id)
       params[:friend][:ids].each do |friend_id|
+        friend = User.find(friend_id)
+        email_info = { user: current_user,
+                       friend: friend,
+                       message: party.movie_title }
         Invitation.create(party_id: party.id,
                           user_id: friend_id)
+        ViewingPartyMailer.inform(email_info, friend.email).deliver_now
       end
       redirect_to '/dashboard'
     else
