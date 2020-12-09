@@ -30,11 +30,4 @@ class Movie
       genre[:name]
     end
   end
-
-  # Move to facade?
-  def reviews
-    @reviews_data.map do |rev|
-      Review.new(rev)
-    end
-  end
 end

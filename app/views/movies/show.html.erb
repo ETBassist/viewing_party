@@ -32,8 +32,8 @@
     </div>
 
     <div class="reviews">
-      <h3> <%= @movie.reviews_count%> Reviews</h3>
-      <% @movie.reviews.each do |rev| %>
+      <h3> <%= @reviews.count%> Reviews</h3>
+      <% @reviews.each do |rev| %>
       <%= "Author: #{rev.author}" %> <br>
       <p>Description: <%= sanitize(rev.description) %></p><br><br>
       <% end %>

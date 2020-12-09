@@ -10,6 +10,12 @@ class MoviesFacade
     end
   end
 
+  def self.reviews_for(movie)
+    movie.reviews_data.map do |review_info|
+      Review.new(review_info)
+    end
+  end
+
   def self.top_rated_movies
     MovieService.top_rated_movies.map do |movie_data|
       Movie.new(movie_data)
