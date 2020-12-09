@@ -6,7 +6,6 @@ class Movie
               :genres,
               :cast_members,
               :reviews_data,
-              :reviews_count,
               :movie_id
 
   def initialize(movie_details)
@@ -17,7 +16,6 @@ class Movie
     @genres = movie_details[:genres]
     @cast_members = movie_details[:credits][:cast] if movie_details[:credits]
     @reviews_data = movie_details[:reviews][:results] if movie_details[:reviews]
-    @reviews_count = movie_details[:reviews][:total_results] if movie_details[:reviews] # Take out
     @movie_id = movie_details[:id]
   end
 
