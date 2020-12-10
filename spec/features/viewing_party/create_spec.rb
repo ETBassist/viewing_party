@@ -161,8 +161,8 @@ describe 'Create Viewing Party', :vcr do
 
     it "I cannot visit a viewing party page if I am not logged in" do
       user = User.create!(name: 'Key Lime Pie',
-                      email: 'klp@example.com',
-                      password: 'sosecure')
+                          email: 'klp@example.com',
+                          password: 'sosecure')
       party = Party.create!(movie_title: "Fight Club",
                            party_duration: 100,
                            time: '1200hrs',
