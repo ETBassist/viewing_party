@@ -1,4 +1,6 @@
 class ViewingPartyController < ApplicationController
+  before_action :require_login, only: %i[show new edit]
+
   def show
     @party = Party.find(params[:id])
   end
@@ -31,8 +33,8 @@ class ViewingPartyController < ApplicationController
 
       unless params[:friend].nil?
         params[:friend][:ids].each do |friend_id|
-        Invitation.create(party_id: @party.id,
-                          user_id: friend_id)
+          Invitation.create(party_id: @party.id,
+                            user_id: friend_id)
         end
       end
       redirect_to "/viewing_party/#{@party.id}"
@@ -46,13 +48,13 @@ class ViewingPartyController < ApplicationController
     party = Party.find(params[:id])
     Invitation.where(party_id: party.id).destroy_all
     party.destroy
-    redirect_to "/dashboard"
+    redirect_to '/dashboard'
   end
 
   private
 
   def party_params
-    params.permit(:date, :party_duration, :time, :movie_title, :host_id)
+    params.permit(:date, :party_duration, :time, :movie_title, :host_id, :movie_id)
   end
 
   def create_and_send_invite_to(friend_id, party)

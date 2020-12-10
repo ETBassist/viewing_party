@@ -158,5 +158,19 @@ describe 'Create Viewing Party', :vcr do
         expect(page).to have_no_link("Create Viewing Party")
       end
     end
+
+    it "I cannot visit a viewing party page if I am not logged in" do
+      user = User.create!(name: 'Key Lime Pie',
+                          email: 'klp@example.com',
+                          password: 'sosecure')
+      party = Party.create!(movie_title: "Fight Club",
+                           party_duration: 100,
+                           time: '1200hrs',
+                           date: 'tomorrow',
+                           host_id: user.id,
+                           movie_id: 550)
+      visit viewing_party_path(party.id)
+      expect(current_path).to eq(root_path)
+    end
   end
 end
