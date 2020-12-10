@@ -13,7 +13,7 @@ describe 'Dashboard' do
       visit '/dashboard'
 
       expect(page).to have_content("Welcome, #{@user.name}!")
-      expect(page).to have_button("Discover Movies")
+      expect(page).to have_link("Discover Movies")
       expect(page).to have_css(".friends")
       expect(page).to have_css(".viewing-parties")
     end
@@ -21,7 +21,7 @@ describe 'Dashboard' do
     it 'I can click a button to be taken to a discover page' do
       visit '/dashboard'
 
-      click_button('Discover Movies')
+      click_link('Discover Movies')
 
       expect(current_path).to eq('/discover')
     end
