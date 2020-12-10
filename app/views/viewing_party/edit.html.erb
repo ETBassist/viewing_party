@@ -9,7 +9,7 @@
 
   Currently selected date for your Party: <%=@party.date%> <br>
   <label for="date">Select a new date for your viewing party:</label> <br>
-  <input type="date" id="date" name="date" value="<%= @party.date %>"><br/><br>
+  <input type="date" id="date" name="date" min="<%= Date.today %>" value="<%= @party.date %>"><br/><br>
 
   Currently selected time for your Party : <%=@party.time%> <br>
   <label for="time">Select a new time for your viewing party:</label> <br>
