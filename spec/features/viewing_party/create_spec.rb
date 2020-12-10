@@ -167,7 +167,8 @@ describe 'Create Viewing Party', :vcr do
                            party_duration: 100,
                            time: '1200hrs',
                            date: 'tomorrow',
-                           host_id: user.id)
+                           host_id: user.id,
+                           movie_id: 550)
       visit viewing_party_path(party.id)
       expect(current_path).to eq(root_path)
     end

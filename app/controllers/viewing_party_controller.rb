@@ -54,7 +54,7 @@ class ViewingPartyController < ApplicationController
   private
 
   def party_params
-    params.permit(:date, :party_duration, :time, :movie_title, :host_id)
+    params.permit(:date, :party_duration, :time, :movie_title, :host_id, :movie_id)
   end
 
   def create_and_send_invite_to(friend_id, party)
