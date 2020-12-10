@@ -37,5 +37,11 @@ describe 'Viewing Part Show Page' do
       expect(page).to have_content("#{@party.time}")
       expect(page).to have_content("#{@user_2.name}")
     end
+
+    it 'I can click a link to see details about the party movie' do
+      click_link('View Movie Details')
+
+      expect(current_path).to eq("/movies/#{@movie.movie_id}")
+    end
   end
 end
