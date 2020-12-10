@@ -20,6 +20,35 @@ class ViewingPartyController < ApplicationController
     end
   end
 
+  def edit
+    @party = Party.find(params[:id])
+    @invitees = current_user.friends.where.not(id: @party.users.pluck(:id))
+  end
+
+  def update
+    @party = Party.find(params[:id])
+    if @party.update(party_params)
+
+      unless params[:friend].nil?
+        params[:friend][:ids].each do |friend_id|
+        Invitation.create(party_id: @party.id,
+                          user_id: friend_id)
+        end
+      end
+      redirect_to "/viewing_party/#{@party.id}"
+    else
+      flash[:notice] = @party.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def delete
+    party = Party.find(params[:id])
+    Invitation.where(party_id: party.id).destroy_all
+    party.destroy
+    redirect_to "/dashboard"
+  end
+
   private
 
   def party_params
