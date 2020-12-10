@@ -22,9 +22,11 @@
   </li>
   <% end %> <br>
 
-  <span>Include: <br/>
-    <%= collection_check_boxes :friend, :ids, @invitees, :id, :name, include_hidden: false %>
-  </span>
+  <% if @invitees %>
+    <span>Include: <br/>
+      <%= collection_check_boxes :friend, :ids, @invitees, :id, :name, include_hidden: false %>
+    </span>
+  <% end %>
   <%= submit_tag "Update Party" %>
 </section>
 <% end %>
