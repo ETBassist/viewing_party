@@ -1,14 +1,17 @@
 class MovieService
-  def self.top_rated_movies
-    movies = get_json('/3/movie/top_rated?page=1')[:results]
-    movies << get_json('/3/movie/top_rated?page=2')[:results]
+  def self.top_rated_movies(num_pages = 2)
+    movies = []
+    num_pages.times do |num|
+      movies << get_json("/3/movie/top_rated?page=#{num + 1}")[:results]
+    end
     movies.flatten
   end
 
-  def self.movies_by_keyword(name)
-    response = get_json("/3/search/movie?query=#{name}")
-    movies = response[:results]
-    movies << get_json("/3/search/movie?query=#{name}&page=2")[:results] if response[:total_pages] > 1
+  def self.movies_by_keyword(name, num_pages = 2)
+    movies = []
+    num_pages.times do |num|
+      movies << get_json("/3/search/movie?query=#{name}&page=#{num + 1}")[:results]
+    end
     movies.flatten.compact
   end
 

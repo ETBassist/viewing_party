@@ -6,7 +6,6 @@ class Movie
               :genres,
               :cast_members,
               :reviews_data,
-              :reviews_count,
               :movie_id
 
   def initialize(movie_details)
@@ -17,15 +16,7 @@ class Movie
     @genres = movie_details[:genres]
     @cast_members = movie_details[:credits][:cast] if movie_details[:credits]
     @reviews_data = movie_details[:reviews][:results] if movie_details[:reviews]
-    @reviews_count = movie_details[:reviews][:total_results] if movie_details[:reviews] # Take out
     @movie_id = movie_details[:id]
-  end
-
-  # Move to facade?
-  def top_ten_cast_members
-    @cast_members[0..9].map do |member|
-      CastMember.new(member)
-    end
   end
 
   def formatted_runtime
@@ -35,13 +26,6 @@ class Movie
   def genre_names
     @genres.map do |genre|
       genre[:name]
-    end
-  end
-
-  # Move to facade?
-  def reviews
-    @reviews_data.map do |rev|
-      Review.new(rev)
     end
   end
 end

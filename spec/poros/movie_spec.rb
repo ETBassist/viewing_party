@@ -15,9 +15,7 @@ RSpec.describe Movie do
     expect(movie.genre_names).to eq(["Drama"])
     expect(movie.description.class).to eq(String)
     expect(movie.cast_members.class).to eq(Array)
-    expect(movie.reviews_count).to eq(3)
     expect(movie.formatted_runtime).to eq("2h 19min")
-    expect(movie.reviews.class).to eq(Array)
-    expect(movie.reviews.first.class).to eq(Review)
+    expect(movie.reviews_data.class).to eq(Array)
   end
 end

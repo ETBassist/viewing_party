@@ -11,8 +11,8 @@
 
   <main>
     <ul>
-      <%= tag.li "Vote Average: ", id: 'vote_average' %>
-      <%= tag.li "Runtime: #{@movie.runtime}", id: 'runtime' %>
+      <%= tag.li "Vote Average: #{@movie.vote_average}", id: 'vote_average' %>
+      <%= tag.li "Runtime: #{@movie.formatted_runtime}", id: 'runtime' %>
       <div class="genres">
         <%= tag.li "Genres: #{@movie.genre_names.join(", ")}" %>
       </div>
@@ -25,15 +25,15 @@
     <div class="cast_members">
       <h3>Cast:</h3>
       <ul>
-        <% @movie.top_ten_cast_members.each do |actor|  %>
+        <% @top_ten_cast_members.each do |actor|  %>
         <%= tag.li "#{actor.actor}, as #{actor.character}" %>
         <%end%>
       </ul>
     </div>
 
     <div class="reviews">
-      <h3> <%= @movie.reviews_count%> Reviews</h3>
-      <% @movie.reviews.each do |rev| %>
+      <h3> <%= @reviews.count%> Reviews</h3>
+      <% @reviews.each do |rev| %>
       <%= "Author: #{rev.author}" %> <br>
       <p>Description: <%= sanitize(rev.description) %></p><br><br>
       <% end %>
