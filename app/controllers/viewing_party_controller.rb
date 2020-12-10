@@ -1,4 +1,6 @@
 class ViewingPartyController < ApplicationController
+  before_action :require_login, only: [:show, :new, :edit]
+
   def show
     @party = Party.find(params[:id])
   end
