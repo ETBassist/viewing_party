@@ -52,6 +52,25 @@ RSpec.describe 'Edit Viewing Party' do
       expect(page).to have_content(time)
       expect(page).to have_content(date)
     end
+
+    it 'I cannot update the party if I delete the time' do
+      time = DateTime.now.to_time.to_s
+
+      expect(page).to have_button("Edit Party")
+
+      click_on "Edit Party"
+      expect(current_path).to eq("/viewing_party/#{@party.id}/edit")
+
+      within ".viewing-party-edit-form" do
+        page.find(:xpath, '//input[@id="date"]').set(time)
+        page.find(:xpath, '//input[@id="time"]').set('')
+        page.find("#friend_ids_#{@user_3.id}").set(true)
+
+        click_on "Update Party"
+      end
+
+      expect(page).to have_content("Time can't be blank")
+    end
   end
 
   it "Does not show edit button to anyone other than host" do
