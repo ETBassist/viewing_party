@@ -1,6 +1,26 @@
-<%= button_to 'Discover Top 40 Movies', '/movies', method: :get %>
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <img class="mx-auto h-40 w-auto" src="https://user-images.githubusercontent.com/56360157/101715189-3a06f680-3a58-11eb-87da-fd83312229a8.png" alt="Viewing Party Logo">
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        Discover Movies
+      </h2>
+    </div>
 
-<%= form_tag('/movies', method: :get) do %>
-  <%= text_field_tag :search, nil, placeholder: 'Search By Movie Title' %>
-  <%= submit_tag 'Search For Movies' %>
-<% end %>
+    <div>
+      <%= button_to 'Discover Top 40 Movies', '/movies', method: :get, class: "relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
+    </div>
+
+    <p class="mt-6 text-center text-xl font-extrabold text-gray-900">OR</p>
+
+    <%= form_tag '/movies', method: :get, class: "mt-8 space-y-6" do %>
+      <div class="rounded-md shadow-sm -space-y-px">
+        <%= text_field_tag :search, nil, placeholder: 'Search By Movie Title', class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" %>
+      </div>
+
+      <div>
+        <%= submit_tag 'Search For Movies', class: "relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" %>
+      </div>
+    <% end %>
+  </div>
+</div>
