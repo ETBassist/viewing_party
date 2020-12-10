@@ -18,7 +18,12 @@ RSpec.describe 'Delete Viewing Party' do
       time = DateTime.now.to_time.to_s
       date = DateTime.now.to_date.to_s
 
-      @party = Party.create!(date: date, party_duration: 150, time: time, movie_title: "#{@movie.title}", host_id: @user.id)
+      @party = Party.create!(date: date,
+                             party_duration: 150,
+                             time: time,
+                             movie_title: "#{@movie.title}",
+                             host_id: @user.id,
+                             movie_id: @movie.movie_id)
 
                 Invitation.create!(party_id: @party.id,
                                    user_id: @user.id)
