@@ -9,7 +9,6 @@ class ViewingPartyController < ApplicationController
 
   def create
     party = Party.new(party_params)
-
     if params[:friend] && party.save
       Invitation.create(party_id: party.id,
                         user_id: current_user.id)
@@ -23,6 +22,35 @@ class ViewingPartyController < ApplicationController
       flash[:notice] = 'Add a friend first' if params[:friend].nil?
       redirect_to "/viewing_party/new/?movie_id=#{params[:movie_id]}"
     end
+  end
+
+  def edit
+    @party = Party.find(params[:id])
+    @invitees = current_user.friends.where.not(id: @party.users.pluck(:id))
+  end
+
+  def update
+    @party = Party.find(params[:id])
+    if @party.update(party_params)
+
+      unless params[:friend].nil?
+        params[:friend][:ids].each do |friend_id|
+        Invitation.create(party_id: @party.id,
+                          user_id: friend_id)
+        end
+      end
+      redirect_to "/viewing_party/#{@party.id}"
+    else
+      flash[:notice] = @party.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def delete
+    party = Party.find(params[:id])
+    Invitation.where(party_id: party.id).destroy_all
+    party.destroy
+    redirect_to "/dashboard"
   end
 
   private
