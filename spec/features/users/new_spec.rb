@@ -44,4 +44,15 @@ describe "User New Page/Registration" do
       expect(page).to have_content("Email has already been taken")
     end
   end
+
+  describe 'As a registered user' do
+    it 'I am redirected to my dashboard if I try to visit the registration page' do
+      user = User.create!(email: 'user@example.com', name: 'User2', password: '123')
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+      visit '/register'
+
+      expect(current_path).to eq('/dashboard')
+    end
+  end
 end

@@ -14,7 +14,7 @@
   <%= text_field_tag :party_duration, @movie.runtime %><br/>
 
   <label for="date">Select a date for your viewing party:</label>
-  <input type="date" id="date" name="date"><br/>
+  <input type="date" id="date" name="date" min="<%= Date.today %>"><br/>
 
   <label for="time">Select a time for your viewing party:</label>
   <input type="time" id="time" name="time"><br/>
