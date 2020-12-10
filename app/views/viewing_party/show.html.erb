@@ -6,5 +6,12 @@
 
 <p>Attendees</p>
 <% @party.users.each do |user| %>
+<li>
   <%= user.name %>
+</li>
+<% end %>
+
+<%if current_user.id == @party.host_id%>
+  <%= button_to 'Edit Party', "/viewing_party/#{@party.id}/edit", method: :get %>
+  <%= button_to 'Delete Party', "/viewing_party/#{@party.id}/delete", method: :delete %>
 <% end %>
