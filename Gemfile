@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt'
 gem 'figaro'
 gem 'faraday'
+gem 'webpacker'
 
 group :development, :test do
   gem 'pry'
